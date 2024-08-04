@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ben.BlockingDetector" Version="0.0.4" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Release'">
+		<PackageReference Include="AspNetCoreRateLimit" Version="5.0.0" />
+		<PackageReference Include="AspNetCoreRateLimit.Redis" Version="2.0.0" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="'$(Configuration)' == 'Debug' or '$(APPVEYOR)' == 'true'">
+		<ProjectReference Include="..\..\src\ApiRateLimit.Redis\ApiRateLimit.Redis.csproj" />
+		<ProjectReference Include="..\..\src\ApiRateLimit\ApiRateLimit.csproj" />
+	</ItemGroup>
+
+</Project>
